@@ -1,0 +1,3 @@
+[submodule "BookMyShowdownClient"]
+	path = BookMyShowdownClient
+	url = git@github.com:MrPhenomenal3110/BookMyShowdownClient.git
