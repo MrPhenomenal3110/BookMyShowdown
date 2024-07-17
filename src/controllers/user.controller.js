@@ -2,6 +2,9 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import EmailHelper from "../utils/emailSender.util.js";
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const otpGenerator = function () {
   return Math.floor((Math.random() * 10000) + 90000);
@@ -60,8 +63,8 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.secret_key_jwt, {
-        expiresIn: "1d",
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+            expiresIn: process.env.JWT_EXPIRY,
         });
 
         res.send({

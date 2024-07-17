@@ -21,16 +21,17 @@ const EmailHelper = async(templateName, subject, reciverEmail, creds) => {
         let content = await fs.promises.readFile(templatePath, "utf-8");
         const emailDetails = {
             to: reciverEmail,
-            from: 'prem.23bcs10060@sst.scaler.com',
+            from: process.env.EMAIL_USER,
             subject: subject,
             text: `Hi ${creds.name} this your reset otp ${creds.otp}`,
             html: replaceContent(content, creds),
         }
         const transportDetails = {
-            host: 'smtp.gmail.com',
+            host: process.env.EMAIL_HOST,
             port: 587,
             auth: {
-                password: process.env.EMAIL_PASSWORD
+                user: process.env.EMAIL_USER,
+                password: process.env.EMAIL_PASSWORD,
             }
         }
 
